@@ -2,18 +2,23 @@ extends Node2D
 
 var isPressDown = false
 var start_mouse_position = Vector2.ZERO
-
 var rigid_body: RigidBody2D
+
+
+var isDead = false
+
+
 
 func _ready():
 	rigid_body = $RigidBody2D
 
 func _process(delta):
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && isPressDown == false:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && !isPressDown && !isDead:
 		isPressDown = true
 		start_mouse_position = get_global_mouse_position()
 		
-	elif !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && start_mouse_position != Vector2.ZERO && isPressDown == true:
+		
+	elif !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && start_mouse_position != Vector2.ZERO && isPressDown && !isDead:
 		isPressDown = false
 		var end_mouse_position = get_global_mouse_position()
 		# Print the coordinates when pressed and released
@@ -25,12 +30,8 @@ func _process(delta):
 
 
 func AddForceToBall(start_mouse_position, end_mouse_position):
-		# Calculate distance and direction
-		var distance = start_mouse_position.distance_to(end_mouse_position)
 		var direction = -(end_mouse_position - start_mouse_position).normalized()
 
-		# Print distance and direction
-		print("Distance: ", distance)
 		print("Direction: ", direction)
 		
 		#remove any forces to 0
@@ -38,9 +39,8 @@ func AddForceToBall(start_mouse_position, end_mouse_position):
 		rigid_body.angular_velocity = 0.0
 		
 		# Add force to the rigid body
-		var force_strength =  distance * 20# Adjust the force strength as needed
-		if force_strength > 1500:
-			force_strength = 1500
+		var force_strength =  1700.0# Adjust the force strength as needed
+
 	
 		rigid_body.apply_central_impulse(direction * force_strength)
 
