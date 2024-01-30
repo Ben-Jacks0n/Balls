@@ -4,7 +4,7 @@ extends Node2D
 var camera : Camera2D
 var deathPos : Node2D
 var gameOverText = preload("res://Prefab/GameOverText.tscn")
-var retryButton = preload("res://Prefab/RetryButton.tscn")
+var gameOverButtons = preload("res://Prefab/game_over_buttons.tscn")
 
 func _ready():
 	camera = $Camera2D
@@ -23,9 +23,9 @@ func GameOver(pos):
 	
 	camera.position.y -= 40
 	var object = gameOverText.instantiate()
-	var buttonObjet = retryButton.instantiate()
+	var buttonsObjet = gameOverButtons.instantiate()
 	camera.add_child(object)
-	camera.add_child(buttonObjet)
+	camera.add_child(buttonsObjet)
 	
 	
 	

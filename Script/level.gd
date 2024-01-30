@@ -14,11 +14,14 @@ func _ready():
 
 func _process(delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && !isPressDown && !isDead:
+		Engine.time_scale = 0.2
 		isPressDown = true
 		start_mouse_position = get_global_mouse_position()
 		
 		
 	elif !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && start_mouse_position != Vector2.ZERO && isPressDown && !isDead:
+		Engine.time_scale = 1
+		
 		isPressDown = false
 		var end_mouse_position = get_global_mouse_position()
 		# Print the coordinates when pressed and released

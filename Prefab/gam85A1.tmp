@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcmjw61pab2wd"]
+
+[ext_resource type="Script" path="res://Script/game_over_buttons.gd" id="1_kh1d6"]
+
+[node name="GameOverButtons" type="Node2D"]
+script = ExtResource("1_kh1d6")
+
+[node name="MainMenuButton" type="Button" parent="."]
+offset_left = 55.0
+offset_top = -291.0
+offset_right = 522.0
+offset_bottom = -114.0
+theme_override_font_sizes/font_size = 70
+text = "MainMenu"
+
+[node name="gameOverButtons" type="Button" parent="."]
+offset_left = -481.0
+offset_top = -293.0
+offset_right = -85.0
+offset_bottom = -113.0
+theme_override_font_sizes/font_size = 70
+text = "Retry"
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="gameOverButtons" to="." method="_on_retry_button_pressed"]
