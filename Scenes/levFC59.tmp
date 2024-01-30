@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://drt2gkj06s7tk"]
+
+[ext_resource type="PackedScene" uid="uid://br3d66acx4pqu" path="res://Prefab/rigid_body_2d.tscn" id="1_say2n"]
+[ext_resource type="Script" path="res://Script/level.gd" id="1_xnquv"]
+[ext_resource type="Script" path="res://Script/rigid_body_2d.gd" id="3_wqqh4"]
+[ext_resource type="PackedScene" path="res://Prefab/lava.tscn" id="4_10cy1"]
+[ext_resource type="Script" path="res://Prefab/lava.gd" id="5_ygawa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ng36q"]
+size = Vector2(1136, 64)
+
+[sub_resource type="QuadMesh" id="QuadMesh_a1umc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xhnc4"]
+friction = 0.35
+rough = true
+bounce = 0.5
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_xnquv")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(576, 647)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_ng36q")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+scale = Vector2(1134, 62)
+mesh = SubResource("QuadMesh_a1umc")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-1057, 647)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_ng36q")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
+scale = Vector2(1134, 62)
+mesh = SubResource("QuadMesh_a1umc")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(2120, 647)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_ng36q")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D3"]
+scale = Vector2(1134, 62)
+mesh = SubResource("QuadMesh_a1umc")
+
+[node name="RigidBody2D" parent="." instance=ExtResource("1_say2n")]
+position = Vector2(428, 178)
+physics_material_override = SubResource("PhysicsMaterial_xhnc4")
+script = ExtResource("3_wqqh4")
+
+[node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+zoom = Vector2(0.49, 0.49)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="Lava" parent="." instance=ExtResource("4_10cy1")]
+position = Vector2(-255, 735)
+script = ExtResource("5_ygawa")

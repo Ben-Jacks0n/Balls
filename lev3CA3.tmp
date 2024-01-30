@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://c16if33aqww8n"]
+
+[ext_resource type="PackedScene" uid="uid://bn6mewm76leir" path="res://Prefab/ball.tscn" id="2_tss6l"]
+
+[sub_resource type="GDScript" id="GDScript_bs3up"]
+script/source = "extends Node2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction = Input.get_axis(\"ui_left\", \"ui_right\")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_w72wy"]
+font_size = 28
+
+[sub_resource type="QuadMesh" id="QuadMesh_82nah"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rw5df"]
+size = Vector2(1150, 38)
+
+[node name="Level 1" type="Node2D"]
+position = Vector2(26, 35)
+script = SubResource("GDScript_bs3up")
+
+[node name="Level1Text" type="Label" parent="."]
+offset_left = 453.0
+offset_top = 268.0
+offset_right = 701.0
+offset_bottom = 323.0
+text = "This is level 1"
+label_settings = SubResource("LabelSettings_w72wy")
+horizontal_alignment = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(109, 579)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+position = Vector2(441, 15.5)
+scale = Vector2(1150, 41)
+mesh = SubResource("QuadMesh_82nah")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(439, 15)
+shape = SubResource("RectangleShape2D_rw5df")
+
+[node name="Ball" parent="." instance=ExtResource("2_tss6l")]
+position = Vector2(562, 190)
+
+[connection signal="hidden" from="Level1Text" to="." method="_on_label_hidden"]
