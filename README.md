@@ -24,7 +24,7 @@ The first time you make a new project in godot you see this
 
 Forward+ just means it's for 3D projects, Mobile means it's for 2D projects, and compatibility is experimental (idk yet)
 
-The game is just compiled from 2 scenes: main_menu the_level.
+The game is just compiled from 2 scenes: main_menu and level.
 
 ## Main Menu
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/7b89b1be-e4c3-4ca9-a779-e9159bd767ce)
