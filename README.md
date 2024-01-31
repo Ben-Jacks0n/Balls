@@ -1,2 +1,3 @@
 # Balls
-Game Practice
+Recreation of the game "Balls?" made by dani for practice.
+
