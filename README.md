@@ -16,7 +16,7 @@ Currently its just the core mechanics of shooting the ball and hitting the red b
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/dcf77fc8-7578-4f26-87d5-ad7c004adcb4)
 
 ## Introduction
-This project is a 2D project to recreate the game "Balls?". The purpose of this project is to learn the basics of godot. After the Unity scandal I felt that its time to switch to godot. From what I've experienced the engine is beginer friendly and easy to uderstand. Now i just need to practice more so that I have a better and faster workflow. The godot engine although cannot be compared to unity becase it has i'ts own system and it's not in any way a one to one replacement of unity. 
+This project is a 2D project to recreate the game "Balls?". The purpose of this project is to learn the basics of godot. After the Unity scandal I felt that its time to switch to godot. From what I've experienced the engine is beginer friendly and easy to uderstand. Now I just need to practice more so that I have a better and faster workflow. The godot engine although cannot be compared to unity becase it has i'ts own system and it's not in any way a one to one replacement of unity. 
 
 The first time you make a new project in godot you see this
 
@@ -68,7 +68,7 @@ The player is a RigidBody2D node with MeshInstance2D for the color and the Colli
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/f1d75d25-1a08-4a43-b0b5-6f11f8f34e8a)
 
-The player node I saved it to a folder. You can do this to any node by right clicking a node and choose "Save Branch as Scene" this will store the node into a folder that can be reused simmilar to a prefab in unity.
+The player node I saved it to a folder. You can do this to any node by right clicking a node and choose "Save Branch as Scene" this will store the node into a folder that can be reused, simmilar to a prefab in unity.
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/ff652cbd-3595-4bf7-b122-5e1e0e1cbc5d)
 
@@ -202,4 +202,92 @@ func AddForceToPlayer():
 		end_mouse_position = Vector2.ZERO
 ```
 
+Firstly I have the player rigidbody declared and assigned in the function _ready(): two main booleans: "isPressDown" and "isDead" mentioned in the The Environment section and also two vectors for start and end positions.
 
+```GDScript
+var isPressDown : bool = false
+var start_mouse_position : Vector2 = Vector2.ZERO
+var end_mouse_position : Vector2 = Vector2.ZERO
+var isDead = false
+
+var rigid_body: RigidBody2D
+var line2D : Line2D
+
+func _ready():
+	rigid_body = $Player
+	line2D = $Line2D
+```
+
+In the process function I checked if the left mouse button is being pressed and if the player is not dead. If both are true then I also check if is curently pressed down. if is has not then I will set it to slowmo by changing the time scale to 0.2, set the isPressedDown to true, and record the start_mouse_position. the reason I used the bool isPressDown is so that I can record the start mouse position only once until the user let go of the left mouse.
+
+I record the end mouse position while the if statement is true, calculate the direction and the velocity. (note that I recorded the start position from the screen position and not the game world position). This will constantly record the end position and calculate velocity until the if statement is no longer true.
+
+```GDScript
+func _process(delta):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && !isDead:
+		if !isPressDown:
+			Engine.time_scale = 0.2
+			isPressDown = true
+			start_mouse_position = get_viewport().get_mouse_position()
+		
+		line2D.position = rigid_body.position
+		end_mouse_position = get_viewport().get_mouse_position()
+		direction = (end_mouse_position - start_mouse_position).normalized()
+		velocity = line2D.update_trajectory(direction, speed, Vector2(0, gravity), rigid_body.mass, start_mouse_position,  end_mouse_position)
+```
+
+
+The "line2D.position = rigid_body.position" and the "velocity = line2D.update_trajectory(direction, speed, Vector2(0, gravity), rigid_body.mass, start_mouse_position,  end_mouse_position)" is used for this script that is attached to line2D 
+
+```GDScript
+extends Line2D
+
+func _ready() -> void:
+	pass
+
+func update_trajectory(dir: Vector2, speed: float, gravity: Vector2, mass : float, start_mouse_position: Vector2, end_mouse_position: Vector2 ):
+	var max_points = 50
+	clear_points()
+	var pos: Vector2 = Vector2.ZERO
+	var vel = dir * speed
+	
+	add_point(pos)
+	var dist = (end_mouse_position - start_mouse_position) * 3
+	pos += dist
+	add_point(pos)
+	
+	
+	#for i in range(max_points):
+		#add_point(pos)
+		#var t = i * 0.05 
+		#pos = vel * t + gravity * 0.5 *  t** 2
+	
+	return vel
+```
+
+The script above returns the velocity calculated by speed times direction. This function was originally used to add a trajectory line for the player but it is not accurate at the moment and it is replaced with a straight line
+
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/7f2ad77a-a997-4bd1-9396-d71492da2f69)
+
+
+Now back to the main script. I made an else if statement that checks if the user no longer holds the mouse button, the start mouse position was recorded, the isPressDown is true, and the player is not dead, then we stop the slowmotion, clear any lines, set the isPressedDown bool to false and finally add force to the player.
+
+```GDScript
+	elif !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && start_mouse_position != Vector2.ZERO && isPressDown && !isDead:
+		Engine.time_scale = 1
+		line2D.clear_points()
+		
+		isPressDown = false
+		print("Mouse Pressed Coordinates: ", start_mouse_position)
+		print("Mouse Released Coordinates: ", end_mouse_position)
+		
+		AddForceToPlayer()
+```
+Since I already calculated the velocity, i can just change the players velocity to the calculated velocity then change the start and end position back to zero for the next cycle.
+```GDScript
+func AddForceToPlayer():
+		print("Direction: ", direction)
+		rigid_body.linear_velocity = velocity
+		start_mouse_position = Vector2.ZERO
+		end_mouse_position = Vector2.ZERO
+```
