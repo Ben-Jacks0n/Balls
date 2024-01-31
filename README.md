@@ -12,5 +12,5 @@ Currently its just the core mechanics of shooting the ball and hitting the red b
 * Click Import
 * Choose the file path to the project
 * After the scene is loaded, on the right hand corner click the play button
-  ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/dcf77fc8-7578-4f26-87d5-ad7c004adcb4)
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/dcf77fc8-7578-4f26-87d5-ad7c004adcb4)
  
