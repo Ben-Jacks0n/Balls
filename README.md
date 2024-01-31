@@ -4,7 +4,7 @@ Recreation of the game "Balls?" made by dani for practice.
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/9a925a8d-c63f-4218-b818-f729a6272fb7)
 
 Last edited: 1/31/2024 10:16pm
-Currently its just the core mechanics of shooting the ball and hitting the red ball targets. This is for beter understanding the 2D Physics and the godot workflow.
+Currently it's just the core mechanics of shooting the ball and hitting the red ball targets. This is for better understanding the 2D Physics and the godot workflow.
 
 ## Play Instructions
 * Clone or download the project
@@ -16,7 +16,7 @@ Currently its just the core mechanics of shooting the ball and hitting the red b
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/dcf77fc8-7578-4f26-87d5-ad7c004adcb4)
 
 ## Introduction
-This project is a 2D project to recreate the game "Balls?". The purpose of this project is to learn the basics of godot. After the Unity scandal I felt that its time to switch to godot. From what I've experienced the engine is beginer friendly and easy to uderstand. Now I just need to practice more so that I have a better and faster workflow. The godot engine although cannot be compared to unity becase it has i'ts own system and it's not in any way a one to one replacement of unity. 
+This project is a 2D project to recreate the game "Balls?". The purpose of this project is to learn the basics of godot. After the Unity scandal I felt that it's time to switch to godot. From what I've experienced the engine is beginner friendly and easy to understand. Now I just need to practise more so that I have a better and faster workflow. The godot engine although cannot be compared to unity because it has its own system and it's not in any way a one to one replacement of unity.  
 
 The first time you make a new project in godot you see this
 
@@ -33,7 +33,7 @@ The main menu is just comprised of text and two buttons play and quit. Everythin
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/15cfa355-f82e-4efc-b283-bed26fcbc442)
 
-Simmilar to unity, the scene is hierarchical. The node at the very top is the 2D scene, then the three children in the scene are: A label for the menu text, a play button, and a quit button. The symbol that you see on the right side of the "Main Menu" node is a script. I attached a script on the "Main Menu" node to control all the buttons.
+Similar to unity, the scene is hierarchical. The node at the very top is the 2D scene, then the three children in the scene are: A label for the menu text, a play button, and a quit button. The symbol that you see on the right side of the "Main Menu'' node is a script. I attached a script on the "Main Menu'' node to control all the buttons.
 
 So how do you make the buttons work? 
 Godot has this thing called Signals. On every node, in the node section you'll have all kinds of signals which are functions that you can write in after an event has triggered. 
@@ -68,21 +68,20 @@ The player is a RigidBody2D node with MeshInstance2D for the color and the Colli
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/f1d75d25-1a08-4a43-b0b5-6f11f8f34e8a)
 
-The player node I saved it to a folder. You can do this to any node by right clicking a node and choose "Save Branch as Scene" this will store the node into a folder that can be reused, simmilar to a prefab in unity.
+The player node I saved to a folder. You can do this to any node by right clicking a node and choose "Save Branch as Scene '' this will store the node into a folder that can be reused, similar to a prefab in unity.
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/ff652cbd-3595-4bf7-b122-5e1e0e1cbc5d)
 
-Ive attached a camera node in the player so it can track the player. 
+I attached a camera node in the player so it can track the player. 
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/94affdbc-3fe6-4f21-a9a5-749ca7e99952)
 
-Ive also made a grup called "Player" for the player. This is simmilar to tags in unity and it will be usefull later
+I also made a group called "Player" for the player. This is similar to tags in unity and it will be useful later
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/a827989d-c266-4cdd-9173-5f2ad2468a7b)
 
 
-And lastly the player has a GameOver button. When triggered it will record the position to the deathPos node. Then it will change the camera parent to the deathPos, despawn the player and spawn the game over text and the game over buttons as children of the camera. The line2D.clear_points() will be usefull for later.
-
+And lastly the player has a GameOver button. When triggered it will record the position to the deathPos node. Then it will change the camera parent to the deathPos, despawn the player and spawn the game over text and the game over buttons as children of the camera. The line2D.clear_points() will be useful for later.
 ```GDScript
 extends Node2D
 
@@ -117,15 +116,15 @@ func GameOver(pos):
 ```
 
 ### The Environment
-There are many nodes that you can use to create an environment but I only used two tipes of nodes which are StaticBody2D and Area2D. The StaticBody2D is used for platforms to stand on. It is also required to have a collision and a mesh as children.
+There are many nodes that you can use to create an environment but I only used two types of nodes which are StaticBody2D and Area2D. The StaticBody2D is used for platforms to stand on. It is also required to have a collision and a mesh as children.
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/1b99f81f-75ec-4ed9-b2f3-a5c38418f6a3)
 
-Now the Area2D is used for the lava to kill the player. Since it doesn't need to interact with the player like bouncing or other physics, I used the Area2D which only checks if an object has entered the area. But Area2D nodes still required to have a collision and a mesh as children.
+Now the Area2D is used for the lava to kill the player. Since it doesn't need to interact with the player like bouncing or other physics, I used the Area2D which only checks if an object has entered the area. But Area2D nodes are still required to have a collision and a mesh as children.
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/b8375ff3-46a9-4428-bf3a-c8a1d6534c83)
 
-Then I attached a script to the lava that checks if an object with the tag "Player" has entered the area then it will trigger the script GameOver() in the current player position. the level.isDead = true will be usefull for later.
+Then I attached a script to the lava that checks if an object with the tag "Player" has entered the area then it will trigger the script GameOver() in the current player position. the level.isDead = true will be useful for later.
 
 ```GDScript
 extends Area2D
@@ -144,7 +143,7 @@ func _on_body_entered(body):
 ```
 
 ### The Launch Mechanic
-The launch mechanic pretty much boils down to record the coordinates when the left mouse is first clicked, record the coordinates when the left mouse is releaced, launch the player to that direction. The control script is attached to the level. Here is the full code.
+The launch mechanic pretty much boils down to record the coordinates when the left mouse is first clicked, record the coordinates when the left mouse is released, and launch the player to that direction. The control script is attached to the level. Here is the full code.
 ```GDScript
 extends Node2D
 
@@ -218,7 +217,7 @@ func _ready():
 	line2D = $Line2D
 ```
 
-In the process function I checked if the left mouse button is being pressed and if the player is not dead. If both are true then I also check if is curently pressed down. if is has not then I will set it to slowmo by changing the time scale to 0.2, set the isPressedDown to true, and record the start_mouse_position. the reason I used the bool isPressDown is so that I can record the start mouse position only once until the user let go of the left mouse.
+In the process function I checked if the left mouse button is being pressed and if the player is not dead. If both are true then I also check if it is currently pressed down. If it has not then I will set it to slowmo by changing the time scale to 0.2, set the isPressedDown to true, and record the start_mouse_position. The reason I used the bool isPressDown is so that I can record the start mouse position only once until the user lets go of the left mouse.
 
 I record the end mouse position while the if statement is true, calculate the direction and the velocity. (note that I recorded the start position from the screen position and not the game world position). This will constantly record the end position and calculate velocity until the if statement is no longer true.
 
@@ -270,7 +269,7 @@ The script above returns the velocity calculated by speed times direction. This 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/7f2ad77a-a997-4bd1-9396-d71492da2f69)
 
 
-Now back to the main script. I made an else if statement that checks if the user no longer holds the mouse button, the start mouse position was recorded, the isPressDown is true, and the player is not dead, then we stop the slowmotion, clear any lines, set the isPressedDown bool to false and finally add force to the player.
+Now back to the main script. I made an else if statement that checks if the user no longer holds the mouse button, the start mouse position was recorded, the isPressDown is true, and the player is not dead, then we stop the slow motion, clear any lines, set the isPressedDown bool to false and finally add force to the player.
 
 ```GDScript
 	elif !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) && start_mouse_position != Vector2.ZERO && isPressDown && !isDead:
@@ -316,4 +315,4 @@ func _on_body_entered(body):
 ```
 
 ## Conclusion
-This is a practice project for better understanding the consept of godot. Ive learned alot from this little project alone from Nodes, signals, grups to prefabs and how to attach scripts. Ofcouse there is still alot to learn and alot to be done like making a point system etc. Although I have some concerns with the 2D physics when calculated is not accurate and the coordinate system is backwards. plus y is down and minus y is up. Hopefullu I can learn to overcome this and master it in future projects.
+This is a practice project for better understanding the concept of godot. Ive learned alot from this little project alone from Nodes, signals, groups to prefabs and how to attach scripts. Of Course there is still a lot to learn and a lot to be done like making a point system etc. Although I have some concerns with the 2D physics when calculated is not accurate and the coordinate system is backwards. plus y is down and minus y is up. Hopefully I can learn to overcome this and master it in future projects.
