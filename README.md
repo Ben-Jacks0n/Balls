@@ -127,7 +127,7 @@ Now the Area2D is used for the lava to kill the player. Since it doesn't need to
 
 Then I attached a script to the lava that checks if an object with the tag "Player" has entered the area then it will trigger the script GameOver() in the current player position
 
-```GCScript
+```GDScript
 extends Area2D
 
 var level : Node2D
