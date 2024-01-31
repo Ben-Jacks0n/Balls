@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://drt2gkj06s7tk"]
+
+[ext_resource type="PackedScene" uid="uid://br3d66acx4pqu" path="res://Prefab/Player.tscn" id="1_say2n"]
+[ext_resource type="Script" path="res://Script/controls.gd" id="1_xnquv"]
+[ext_resource type="Script" path="res://Script/player.gd" id="3_wqqh4"]
+[ext_resource type="Script" path="res://Script/Line2D.gd" id="4_6fusu"]
+[ext_resource type="PackedScene" uid="uid://bwt5sfjtic2b0" path="res://Prefab/lava.tscn" id="4_10cy1"]
+[ext_resource type="Script" path="res://Script/lava.gd" id="5_ygawa"]
+
+[sub_resource type="Curve" id="Curve_dkq61"]
+_data = [Vector2(0, 0.870739), 0.0, 0.0, 0, 0, Vector2(1, 0.648352), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ng36q"]
+size = Vector2(1136, 64)
+
+[sub_resource type="QuadMesh" id="QuadMesh_a1umc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xhnc4"]
+bounce = 0.4
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_xnquv")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(428, 178)
+scale = Vector2(1.10002, 0.751)
+width = 39.715
+width_curve = SubResource("Curve_dkq61")
+default_color = Color(0.709614, 3.36915e-07, 0.371178, 1)
+script = ExtResource("4_6fusu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(576, 647)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_ng36q")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+scale = Vector2(1134, 62)
+mesh = SubResource("QuadMesh_a1umc")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-1057, 647)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_ng36q")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
+scale = Vector2(1134, 62)
+mesh = SubResource("QuadMesh_a1umc")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(2120, 647)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_ng36q")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D3"]
+scale = Vector2(1134, 62)
+mesh = SubResource("QuadMesh_a1umc")
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_say2n")]
+position = Vector2(428, 178)
+scale = Vector2(0.986131, 1)
+physics_material_override = SubResource("PhysicsMaterial_xhnc4")
+linear_damp_mode = 1
+script = ExtResource("3_wqqh4")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.34, 0.34)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="Lava" parent="." instance=ExtResource("4_10cy1")]
+position = Vector2(368, 732)
+script = ExtResource("5_ygawa")
+
+[node name="DeathPos" type="Node2D" parent="."]
+
+[node name="Line2D2" type="Line2D" parent="."]
+
+[connection signal="body_entered" from="Lava" to="Lava" method="_on_body_entered"]

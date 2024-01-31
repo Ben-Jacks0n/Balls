@@ -1,10 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://drt2gkj06s7tk"]
+[gd_scene load_steps=12 format=3 uid="uid://drt2gkj06s7tk"]
 
-[ext_resource type="PackedScene" uid="uid://br3d66acx4pqu" path="res://Prefab/rigid_body_2d.tscn" id="1_say2n"]
-[ext_resource type="Script" path="res://Script/level.gd" id="1_xnquv"]
-[ext_resource type="Script" path="res://Script/rigid_body_2d.gd" id="3_wqqh4"]
+[ext_resource type="PackedScene" uid="uid://br3d66acx4pqu" path="res://Prefab/Player.tscn" id="1_say2n"]
+[ext_resource type="Script" path="res://Script/controls.gd" id="1_xnquv"]
+[ext_resource type="Script" path="res://Script/player.gd" id="3_wqqh4"]
+[ext_resource type="Script" path="res://Script/Line2D.gd" id="4_6fusu"]
 [ext_resource type="PackedScene" uid="uid://bwt5sfjtic2b0" path="res://Prefab/lava.tscn" id="4_10cy1"]
 [ext_resource type="Script" path="res://Script/lava.gd" id="5_ygawa"]
+[ext_resource type="PackedScene" uid="uid://eg6w8yr040n3" path="res://Prefab/redball.tscn" id="7_4olf4"]
+
+[sub_resource type="Curve" id="Curve_dkq61"]
+_data = [Vector2(0, 0.870739), 0.0, 0.0, 0, 0, Vector2(1, 0.648352), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ng36q"]
 size = Vector2(1136, 64)
@@ -12,11 +18,18 @@ size = Vector2(1136, 64)
 [sub_resource type="QuadMesh" id="QuadMesh_a1umc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xhnc4"]
-rough = true
 bounce = 0.4
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_xnquv")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(428, 178)
+scale = Vector2(1.10002, 0.751)
+width = 39.715
+width_curve = SubResource("Curve_dkq61")
+default_color = Color(0.709614, 3.36915e-07, 0.371178, 1)
+script = ExtResource("4_6fusu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(576, 647)
@@ -48,13 +61,14 @@ shape = SubResource("RectangleShape2D_ng36q")
 scale = Vector2(1134, 62)
 mesh = SubResource("QuadMesh_a1umc")
 
-[node name="RigidBody2D" parent="." groups=["Player"] instance=ExtResource("1_say2n")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_say2n")]
 position = Vector2(428, 178)
-mass = 1.51
+scale = Vector2(0.986131, 1)
 physics_material_override = SubResource("PhysicsMaterial_xhnc4")
+linear_damp_mode = 1
 script = ExtResource("3_wqqh4")
 
-[node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.34, 0.34)
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
@@ -64,5 +78,119 @@ position = Vector2(368, 732)
 script = ExtResource("5_ygawa")
 
 [node name="DeathPos" type="Node2D" parent="."]
+
+[node name="Line2D2" type="Line2D" parent="."]
+visible = false
+
+[node name="Area2D" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(685, -622)
+
+[node name="Area2D2" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-649, 299)
+
+[node name="Area2D3" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-566, -206)
+
+[node name="Area2D5" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(1689, -642)
+
+[node name="Area2D6" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(1772, -1147)
+
+[node name="Area2D7" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-713, -970)
+
+[node name="Area2D8" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-630, -1475)
+
+[node name="Area2D9" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-713, -970)
+
+[node name="Area2D11" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-1147, -672)
+
+[node name="Area2D12" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-2398, -256)
+
+[node name="Area2D13" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-2545, -1020)
+
+[node name="Area2D14" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-2545, -1020)
+
+[node name="Area2D15" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(2281, -2012)
+
+[node name="Area2D16" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(1030, -1596)
+
+[node name="Area2D17" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(883, -2360)
+
+[node name="Area2D18" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(883, -2360)
+
+[node name="Area2D10" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-630, -1475)
+
+[node name="Area2D4" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(1114, -215)
+
+[node name="Area2D19" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(2061, -166)
+
+[node name="Area2D20" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(2406, -1140)
+
+[node name="Area2D21" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(2490, 241)
+
+[node name="Area2D22" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(87, -693)
+
+[node name="Area2D23" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(432, -1667)
+
+[node name="Area2D24" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(516, -286)
+
+[node name="Area2D25" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-1296, -1192)
+
+[node name="Area2D26" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-951, -2166)
+
+[node name="Area2D27" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-867, -785)
+
+[node name="Area2D28" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-1143, 186)
+
+[node name="Area2D29" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-1724, -280)
+
+[node name="Area2D30" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-1444, -393)
+
+[node name="Area2D31" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(325, -1403)
+
+[node name="Area2D32" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(-256, -1869)
+
+[node name="Area2D33" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(24, -1982)
+
+[node name="Area2D34" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(3440, 22)
+rotation = 0.223658
+
+[node name="Area2D35" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(2859, -444)
+rotation = 0.223658
+
+[node name="Area2D36" parent="." instance=ExtResource("7_4olf4")]
+position = Vector2(3139, -557)
+rotation = 0.223658
 
 [connection signal="body_entered" from="Lava" to="Lava" method="_on_body_entered"]
