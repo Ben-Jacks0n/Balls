@@ -59,6 +59,10 @@ func _on_quit_pressed():
 
 
 ## Level
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/0b30eb90-c6de-4bcc-a0cb-b5430c17387c)
+
 The level ill break it down into 4 parts that are: the player, the envirorment, the launch mechanic, and the red ball.
+
+### The Player
 
 
