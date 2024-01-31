@@ -34,4 +34,10 @@ The main menu is just comprised of text and two buttons play and quit. Everythin
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/15cfa355-f82e-4efc-b283-bed26fcbc442)
 
 Simmilar to unity, the scene is hierarchical. The node at the very top is the 2D scene, then the three children in the scene are: A label for the menu text, a play button, and a quit button.
+
+So how do you make the buttons work? Godot has this thing called Signals. On every node, in the node section you have a signal which is a function that you can write in after an event has triggered. 
+
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/3288d0cf-3db7-43fa-b3be-f2aabeb15bba)
+
+
  
