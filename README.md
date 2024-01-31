@@ -81,7 +81,7 @@ Ive also made a grup called "Player" for the player. This is simmilar to tags in
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/a827989d-c266-4cdd-9173-5f2ad2468a7b)
 
 
-And lastly the player has a GameOver button. When triggered it will record the position to the deathPos node. Then it will change the camera parent to the deathPos, despawn the player and spawn the game over text and the game over buttons as children of the camera.
+And lastly the player has a GameOver button. When triggered it will record the position to the deathPos node. Then it will change the camera parent to the deathPos, despawn the player and spawn the game over text and the game over buttons as children of the camera. The line2D.clear_points() will be usefull for later.
 
 ```GDScript
 extends Node2D
@@ -125,7 +125,7 @@ Now the Area2D is used for the lava to kill the player. Since it doesn't need to
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/b8375ff3-46a9-4428-bf3a-c8a1d6534c83)
 
-Then I attached a script to the lava that checks if an object with the tag "Player" has entered the area then it will trigger the script GameOver() in the current player position
+Then I attached a script to the lava that checks if an object with the tag "Player" has entered the area then it will trigger the script GameOver() in the current player position. the level.isDead = true will be usefull for later.
 
 ```GDScript
 extends Area2D
@@ -143,5 +143,6 @@ func _on_body_entered(body):
 
 ```
 
+### The Launch Mechanic
 
 
