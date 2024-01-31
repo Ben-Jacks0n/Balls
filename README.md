@@ -29,4 +29,9 @@ The game is just compiled from 2 scenes: main_menu the_level.
 ## Main Menu
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/7b89b1be-e4c3-4ca9-a779-e9159bd767ce)
 
+The main menu is just comprised of text and two buttons play and quit. Everything from the scene is made up of nodes. 
+
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/15cfa355-f82e-4efc-b283-bed26fcbc442)
+
+Simmilar to unity, the scene is hierarchical. The node at the very top is the 2D scene, then the three children in the scene are: A label for the menu text, a play button, and a quit button.
  
