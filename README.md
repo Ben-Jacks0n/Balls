@@ -76,3 +76,37 @@ Ive also attached a camera node in the player so it can track the player.
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/94affdbc-3fe6-4f21-a9a5-749ca7e99952)
 
+And lastly the player has a GameOver button. When triggered it will record the position to the deathPos node. Then it will change the camera parent to the deathPos, despawn the player and spawn the game over text and the game over buttons
+
+```GDScript
+extends Node2D
+
+var camera : Camera2D
+var deathPos : Node2D
+var gameOverText = preload("res://Prefab/GameOverText.tscn")
+var gameOverButtons = preload("res://Prefab/game_over_buttons.tscn")
+var line2D : Line2D
+
+func _ready():
+	camera = $Camera2D
+	deathPos = $"../DeathPos"
+	line2D = $"../Line2D"
+
+func GameOver(pos):
+	print("GameOver")
+	line2D.clear_points()
+
+	deathPos.position = pos
+	
+	var player = camera.get_parent()
+	player.remove_child(camera)
+	deathPos.add_child(camera)
+	player.get_parent().remove_child(player)
+	
+	
+	camera.position.y -= 40
+	var object = gameOverText.instantiate()
+	var buttonsObjet = gameOverButtons.instantiate()
+	camera.add_child(object)
+	camera.add_child(buttonsObjet)
+```
