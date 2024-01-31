@@ -44,7 +44,7 @@ For example this is the signal panel from the node button "Play". I can use the 
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/63a2aa08-82f3-486b-8b30-d9a2382e9085)
 
-By connecting the signal to a script. It will give you a function in the script that you can write and execute if the conditions are met. The buttons in the function are pretty simple. If the player pressed play it will change scene to the level, and if they pressed quit it will quit the application.
+By connecting the signal to a script. It will give you a function in the script that you can write and execute if the conditions are met. Functions for the buttons are pretty simple. If the player pressed play it will change scene to the level, and if they pressed quit it will quit the application.
 
 ```GDScript
 extends Node2D
