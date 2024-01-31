@@ -293,6 +293,9 @@ func AddForceToPlayer():
 ```
 
 ### The Red Ball
+
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/c230b831-b28c-4e92-ae36-40fa7388d90d)
+
 The red ball is pretty simple, It's just an area2D node with a script attached. The script checks if an object with the tag "Player" has entered the ball, then it will dampen the x linear velocity to 0.3 and remove the y linear velocity and apply impulse upwards.
 
 ```GDScript
@@ -311,3 +314,6 @@ func _on_body_entered(body):
 	
 	self.queue_free()
 ```
+
+## Conclusion
+This is a practice project for better understanding the consept of godot. Ive learned alot from this little project alone from Nodes, signals, grups to prefabs and how to attach scripts. Ofcouse there is still alot to learn and alot to be done like making a point system etc. Although I have some concerns with the 2D physics when calculated is not accurate and the coordinate system is backwards. plus y is down and minus y is up. Hopefullu I can learn to overcome this and master it in future projects.
