@@ -33,7 +33,7 @@ The main menu is just comprised of text and two buttons play and quit. Everythin
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/15cfa355-f82e-4efc-b283-bed26fcbc442)
 
-Simmilar to unity, the scene is hierarchical. The node at the very top is the 2D scene, then the three children in the scene are: A label for the menu text, a play button, and a quit button. The symbol that you see on the right side of the "Main Menu" node is a script. I've attached a script on the "Main Menu" node to control all the buttons.
+Simmilar to unity, the scene is hierarchical. The node at the very top is the 2D scene, then the three children in the scene are: A label for the menu text, a play button, and a quit button. The symbol that you see on the right side of the "Main Menu" node is a script. I attached a script on the "Main Menu" node to control all the buttons.
 
 So how do you make the buttons work? 
 Godot has this thing called Signals. On every node, in the node section you'll have all kinds of signals which are functions that you can write in after an event has triggered. 
@@ -68,7 +68,7 @@ The player is a RigidBody2D node with MeshInstance2D for the color and the Colli
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/f1d75d25-1a08-4a43-b0b5-6f11f8f34e8a)
 
-The player node i've saved it to a folder. You can do this to any node by right clicking a node and choose "Save Branch as Scene" this will store the node into a folder that can be reused simmilar to a prefab in unity.
+The player node I saved it to a folder. You can do this to any node by right clicking a node and choose "Save Branch as Scene" this will store the node into a folder that can be reused simmilar to a prefab in unity.
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/ff652cbd-3595-4bf7-b122-5e1e0e1cbc5d)
 
@@ -121,10 +121,26 @@ There are many nodes that you can use to create an environment but I only used t
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/1b99f81f-75ec-4ed9-b2f3-a5c38418f6a3)
 
-Now the Area2D is used for the lava to kill the player. Since it doesn't need to interact with the player like bouncing or any physics, I used the Area2D which only checks if an object has entered the area. But Area2D nodes still required to have a collision and a mesh as children.
+Now the Area2D is used for the lava to kill the player. Since it doesn't need to interact with the player like bouncing or other physics, I used the Area2D which only checks if an object has entered the area. But Area2D nodes still required to have a collision and a mesh as children.
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/b8375ff3-46a9-4428-bf3a-c8a1d6534c83)
 
+Then I attached a script to the lava that checks if an object with the tag "Player" has entered the area then it will trigger the script GameOver() in the current player position
+```GCScript
+extends Area2D
+
+var level : Node2D
+
+func _ready():
+	level  = $".."
+	
+	
+func _on_body_entered(body):
+	if body.is_in_group("Player"):
+		body.GameOver(body.position)
+		level.isDead = true
+
+```
 
 
 
