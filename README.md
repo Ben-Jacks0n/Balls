@@ -29,7 +29,7 @@ The game is just compiled from 2 scenes: main_menu and level.
 ## Main Menu
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/7b89b1be-e4c3-4ca9-a779-e9159bd767ce)
 
-The main menu is just comprised of text and two buttons play and quit. Everything from the scene is made up of nodes. 
+The main menu is comprised of text and two buttons play and quit. Everything from the scene is made up of nodes. 
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/15cfa355-f82e-4efc-b283-bed26fcbc442)
 
@@ -40,7 +40,7 @@ Godot has this thing called Signals. On every node, in the node section you'll h
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/3288d0cf-3db7-43fa-b3be-f2aabeb15bba)
 
-For example this is the signal panel from the node button "Play". I can use the signal "pressed()" by connecting it to a script like this:
+For example the image above is the signal panel. from the node button "Play". I can use the signal "pressed()" by connecting it to a script like this:
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/63a2aa08-82f3-486b-8b30-d9a2382e9085)
 
