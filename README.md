@@ -61,22 +61,24 @@ func _on_quit_pressed():
 ## Level
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/0b30eb90-c6de-4bcc-a0cb-b5430c17387c)
 
-The level ill break it down into 4 parts that are: the player, the envirorment, the launch mechanic, and the red ball.
+The level ill break it down into 4 parts that are: the player, the environment, the launch mechanic, and the red ball.
 
 ### The Player
 The player is a RigidBody2D node with MeshInstance2D for the color and the CollisionShape2D for it to collide.
 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/f1d75d25-1a08-4a43-b0b5-6f11f8f34e8a)
 
-The player node i've saved it to a folder. You can do this to any node by right clicking a node and choose "Save Branch as Scene" this will store the node into a folder that can be reused simmilar to a prefab in unity
-
+The player node i've saved it to a folder. You can do this to any node by right clicking a node and choose "Save Branch as Scene" this will store the node into a folder that can be reused simmilar to a prefab in unity.
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/ff652cbd-3595-4bf7-b122-5e1e0e1cbc5d)
 
-Ive also attached a camera node in the player so it can track the player. 
-
+Ive attached a camera node in the player so it can track the player. 
 ![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/94affdbc-3fe6-4f21-a9a5-749ca7e99952)
 
-And lastly the player has a GameOver button. When triggered it will record the position to the deathPos node. Then it will change the camera parent to the deathPos, despawn the player and spawn the game over text and the game over buttons
+Ive also made a grup called "Player" for the player. This is simmilar to tags in unity and it will be usefull later
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/a827989d-c266-4cdd-9173-5f2ad2468a7b)
+
+
+And lastly the player has a GameOver button. When triggered it will record the position to the deathPos node. Then it will change the camera parent to the deathPos, despawn the player and spawn the game over text and the game over buttons as children of the camera.
 
 ```GDScript
 extends Node2D
@@ -110,3 +112,16 @@ func GameOver(pos):
 	camera.add_child(object)
 	camera.add_child(buttonsObjet)
 ```
+
+### The Environment
+There are many nodes that you can use to create an environment but I only used two tipes of nodes which are StaticBody2D and Area2D. The StaticBody2D is used for platforms to stand on. It is also required to have a collision and a mesh as children.
+
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/1b99f81f-75ec-4ed9-b2f3-a5c38418f6a3)
+
+Now the Area2D is used for the lava to kill the player. Since it doesn't need to interact with the player like bouncing or any physics, I used the Area2D which only checks if an object has entered the area. But Area2D nodes still required to have a collision and a mesh as children.
+
+![image](https://github.com/Ben-Jacks0n/Balls/assets/127924235/b8375ff3-46a9-4428-bf3a-c8a1d6534c83)
+
+
+
+
