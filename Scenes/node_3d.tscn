@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cycbj2mcamumi"]
+
+[ext_resource type="Texture2D" uid="uid://cjf111ajh41qt" path="res://Skybox/uploads_files_4110099_nebula-1.exr" id="1_fwsak"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r7vlv"]
+panorama = ExtResource("1_fwsak")
+
+[sub_resource type="Sky" id="Sky_2t1iq"]
+sky_material = SubResource("PanoramaSkyMaterial_r7vlv")
+
+[sub_resource type="Environment" id="Environment_ml2uh"]
+background_mode = 2
+sky = SubResource("Sky_2t1iq")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ml2uh")
